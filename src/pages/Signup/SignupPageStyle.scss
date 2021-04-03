@@ -1,0 +1,30 @@
+.signup {
+    .logoSignup {
+        margin-bottom: 40px;
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    background: linear-gradient(90deg, #007e78  0%, #6f967e  100%);
+    .form {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+        padding: 50px;
+        background-color: white;
+        box-shadow: 2px 1px 1px 1px  #007e78  ;
+        border-radius: 25px;    
+        .input {
+            color: white;
+        }
+    }
+
+    .buttonLogin {
+        margin: 15px !important;
+    }
+}

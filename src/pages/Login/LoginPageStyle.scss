@@ -1,0 +1,37 @@
+.login {
+    
+    .logoLogin {
+        margin-bottom: 20px;
+        height: 100px;
+        color: #a02959;
+    }
+
+    // background-color: #1D1A1A;
+    background: linear-gradient(90deg, #007e78  0%, #6f967e  100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+        padding: 50px;
+        background-color: white;
+        box-shadow: 2px 1px 1px 1px  #007e78  ;
+        border-radius: 25px;    
+    }
+
+    .buttonLogin {
+        margin: 15px;
+        margin-top: 30px!important;
+    }
+
+    .buttonSignup {
+        margin: 10-px !important;
+    }
+}
