@@ -10,21 +10,27 @@
     height: 100%;
     width: 100%;
     flex-direction: column;
-    background: linear-gradient(90deg, #007e78  0%, #6f967e  100%);
-    .form {
+    background-image: url('../../assets/img/backgroundLoginBoti.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .formSignup {
         display: flex;
+        max-width: 250px;
         flex-direction: column;
-        border: 1px solid black;
+        border: 1px solid gray;
         padding: 50px;
         background-color: white;
-        box-shadow: 2px 1px 1px 1px  #007e78  ;
         border-radius: 25px;    
         .input {
-            color: white;
+            margin: 15px;
         }
     }
 
-    .buttonLogin {
-        margin: 15px !important;
+    .buttonSignup {
+        margin-top: 20px !important;
+    }
+    .passwordType{
+        font-size: 10px;
     }
 }

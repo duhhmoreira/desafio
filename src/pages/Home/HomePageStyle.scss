@@ -1,13 +1,59 @@
-.toolbar{
-    display: 'flex';
-    align-items: 'center';
-    justify-content: 'flex-end';
-  }
+@import "../../helpers/viewports";
 
 .content{
     display: flex;
     flex-grow: 1;
-    flex-direction: column;
+    flex-direction: row;
     margin: 90px;
     margin-right: 10px;
+    overflow: hidden;
+    @include viewports(up-to small) {
+      flex: 100%;
+      margin: 10px
+    }
+}
+
+.columnListSale {
+  display: flex;
+  justify-content: center;
+  flex: 70%;
+  overflow: hidden;
+  margin-right: 20px;
+  @include viewports(up-to small) {
+    flex: 100%;
+    margin-right: 0;
+  }
+}
+.columnAddSale {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @include viewports(up-to small) {
+    display: none;
+  }
+}
+
+.listSales{
+  width: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 350px;
+}
+
+.banner{
+  height: 180px;
+  width: 100%;
+  background-image: url('../../assets/img/destaque.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include viewports(up-to small) {
+    margin-top:56px;
+    width: 100%;
+  }
+}
+.container{
+  width: 100%;
 }

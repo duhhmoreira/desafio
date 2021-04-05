@@ -6,8 +6,10 @@
         color: #a02959;
     }
 
-    // background-color: #1D1A1A;
-    background: linear-gradient(90deg, #007e78  0%, #6f967e  100%);
+    background-image: url('../../assets/img/backgroundLoginBoti.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,10 +21,9 @@
     .form {
         display: flex;
         flex-direction: column;
-        border: 1px solid black;
+        border: 1px solid gray;
         padding: 50px;
         background-color: white;
-        box-shadow: 2px 1px 1px 1px  #007e78  ;
         border-radius: 25px;    
     }
 
@@ -31,7 +32,15 @@
         margin-top: 30px!important;
     }
 
+    .buttonSignup{
+        margin-top: 5px; 
+    }
+
     .buttonSignup {
         margin: 10-px !important;
+    }
+
+    .link{
+        color: #337131;
     }
 }

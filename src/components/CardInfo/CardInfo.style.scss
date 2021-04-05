@@ -1,0 +1,20 @@
+.card{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .sale{
+
+    }
+    .status-sale{
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+        flex: 50%;
+    }
+    .cashback{
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+        flex: 50%;
+    }
+}

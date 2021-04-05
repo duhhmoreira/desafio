@@ -1,97 +1,100 @@
 import React, { useState } from 'react'
-import { Button, IconButton, TextField } from '@material-ui/core';
+import { Link, useHistory  } from "react-router-dom";
+import { Button, FormControl, IconButton, TextField } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import { validateEmail, validatePassword } from '../../helpers/Validators';
+import { login } from '../../services/auth';
 import "./LoginPageStyle.scss";
 
-
 const LoginPage = () => {
-
-  const [formValid, setFormValid] = useState({
-    email: true,
-    password: true,
-    formValidate: false,
+  let history = useHistory();
+  const [formLogin, setFormLogin] = useState({
+    email: '',
+    password: '',
+    error: '',
     showPassword: false,
   })
 
-  async function changeLogin() {
- 
-  }  
-  
-  function changeSignup() {
- 
-  }
+  const handleSignIn = async e => {
+    e.preventDefault();
+    const { email, password } = formLogin;
+    if (!email || !password) {
+      setFormLogin({ error: "Preencha e-mail e senha para continuar!" });
+    } else {
+      try {
+        login({ email, password }, history);
+      } catch (err) {
+        setFormLogin({
+          error:
+            "E-mail ou senha incorreto"
+        });
+      }
+    }
+  };
 
-  const handleShowPassword = () => {
-    setFormValid({ ...formValid, showPassword: !formValid.showPassword });
+  const handleChange = (e) => {
+    setFormLogin({
+      ...formLogin,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleClickShowPassword = () => {
+    setFormLogin({ ...formLogin, showPassword: !formLogin.showPassword });
   };
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
-  
-  const validateForm = (field, inputValue) => {
-    field === 'email'
-      ? setFormValid({ ...formValid, email: validateEmail(field, inputValue) })
-      : setFormValid({ ...formValid, password: validatePassword(field, inputValue) });
-
-    if (formValid.email && formValid.password) {
-      setFormValid({ ...formValid, formValidate: true });
-    }
-  }
-
   return (
-    <div className="login">
-        <form className="form">
-        <img src={require("../../assets/img/logoBoticario.png").default} alt="Logo Boticario" className="logoLogin" />
-          <TextField
+  <div className="login">
+    <FormControl className="form" >
+      <img src={require("../../assets/img/logoBoticario.png").default} alt="Logo Boticario" className="logoLogin" />
+      {formLogin.error && <p>{formLogin.error}</p>} 
+      <TextField
+        required
+        InputProps={{
+        className: "input"
+        }}
+        id="email"
+        label="E-mail"
+        onChange={e => handleChange(e)} 
+      />
+      <div>
+        <TextField
           required
-            InputProps={{
-              className: "input"
-            }}
-            id="email-input"
-            label="E-mail"
-            onChange={event => validateForm('email', event.target.value)} />
-            <div>
-          <TextField
-          required
-            InputProps={{
-              className: "input"
-            }}
-            id="password-input"
-            label="Password"
-             type={formValid.showPassword ? 'text' : 'password'} 
-            autoComplete="current-password"
-            onChange={event => validateForm('passwrod', event.target.value)}
-          />
-
-              <IconButton
-                    aria-label="toggle confirm password visibility"
-                    onClick={handleShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {formValid.showConfirmPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-            </div>
-          {!formValid.password || !formValid.email && <label>E-mail/Senha Invalida</label>}
-          <Button
-            disabled={!formValid.formValidate}
-            variant="outlined"
-            color="primary"
-            className="buttonLogin"
-            onClick={() => changeLogin()}>
-            Login
-          </Button>
-          <Button
-            color="primary"
-            className="buttonSignup"
-            onClick={() => changeSignup()}>
-            Cadastre-se
-          </Button>
-        </form>
-    </div>
+          InputProps={{
+          className: "input"
+          }}
+          id="password"
+          label="Password"
+          type={formLogin.showPassword ? 'text' : 'password'} 
+          autoComplete="current-password"
+          onChange={e => handleChange(e)} 
+        />
+        <IconButton
+          aria-label="toggle confirm password visibility"
+          onClick={handleClickShowPassword}
+          onMouseDown={handleMouseDownPassword}
+          edge="end"
+        >
+        {formLogin.showPassword ? <Visibility /> : <VisibilityOff />}
+        </IconButton>
+      </div>
+      <Button
+        variant="contained" 
+        color="primary"
+        className="buttonLogin"
+        onClick={e => handleSignIn(e)}>
+        Login
+      </Button>
+      <Button
+        color="primary"
+        className="buttonSignup">
+          <Link to="/signup" className='link'>Cadastre-se</Link>
+      </Button>
+    </FormControl>
+  </div>
   )
 }
 

@@ -11,11 +11,17 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import HomeIcon from '@material-ui/icons/Home';
+import ListIcon from '@material-ui/icons/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import { Button } from '@material-ui/core';
+import { logout } from '../../services/auth';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -74,8 +80,8 @@ const useStyles = makeStyles((theme: Theme) =>
     toolbar: {
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'flex-end',
-      padding: theme.spacing(0, 1),
+      justifyContent: 'space-between',
+      padding: theme.spacing(0, 2),
       // necessary for content to be below app bar
       ...theme.mixins.toolbar,
     },
@@ -83,11 +89,20 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       padding: theme.spacing(3),
     },
-    logo:{
-      width: 150,
-      margin: 0,
-      padding: 0
-    }  }),
+    buttonLogout:{
+      display: 'flex',
+      justifyContent: 'flex-end',
+      color: 'white'
+    },
+    link:{
+      color: 'white'
+    },
+    newSale: {
+      [theme.breakpoints.up('sm')]: {
+        display: 'none',
+      },
+    }  
+  }),
 );
 
 export default function MiniDrawer() {
@@ -112,7 +127,7 @@ export default function MiniDrawer() {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -124,7 +139,9 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <img src={require("../../assets/img/logoHeader.png").default} alt="Logo Boticario" className={classes.logo} />
+          <Button className={classes.buttonLogout} onClick={logout}>
+            <Link to="/"  className={classes.link} >Sair</Link>
+             </Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -147,12 +164,18 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+        <ListItem button component={Link} to="/home">
+            <ListItemIcon><HomeIcon/></ListItemIcon>
+            <ListItemText primary='Home' />
+          </ListItem>
+          <ListItem className={classes.newSale} button component={Link} to="/new-sale">
+            <ListItemIcon><MonetizationOnIcon/></ListItemIcon>
+            <ListItemText primary='Novo cadastro' />
+          </ListItem>
+        <ListItem button component={Link} to="/cashback">
+            <ListItemIcon><ListIcon/></ListItemIcon>
+            <ListItemText primary='Cashbacks' />
+          </ListItem>
         </List>
       </Drawer>
     </div>

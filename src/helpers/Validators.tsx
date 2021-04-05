@@ -12,30 +12,31 @@ export const validateSamePassword = ( password: string, confirmpassword: string)
   return password === confirmpassword;
 }
 
-//TODO validaDocument
+export const validateCPF = (strCPF : string): boolean => {
+  let soma;
+  var resto;
+  soma = 0;
+  if (strCPF === "00000000000") return false;
 
-export const validate = (values: any): any => {
+  for (var i=1; i<=9; i++) soma = soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+  resto = (soma * 10) % 11;
+
+  if ((resto === 10) || (resto === 11))  resto = 0;
+  if (resto != parseInt(strCPF.substring(9, 10)) ) return false;
+
+  soma = 0;
+  for (var i = 1; i <= 10; i++) soma = soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+  resto = (soma * 10) % 11;
+
+  if ((resto === 10) || (resto === 11))  resto = 0;
+  if (resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+  return true;
+}
+
+export const validateFormSignup = (id: string, value: any): object => {
   const errors:any = {};
-  const requiredFields = [
-    'name',
-    'document',
-    'email',
-    'password',
-    'confirmPassword'
-  ]
-  requiredFields.forEach(field => {
-    if (!values[field]) {
-      errors[field] = 'Campo Obrigatório'
-    }
-  })
-  if(values.email && validateEmail(values.email))  errors.email = "E-mail inválido";
-  if(values.password && validatePassword(values.email))  errors.email = "Senha deve conter no mínimo 8 digitos sendo 1 caractere em maiúsculo, 1 número e 1 caractere especial!";
-  if(values.password && values.confirmPassword ){
-    if(validateSamePassword(values.password, values.confirmPassword )){
-      errors.email= "Senhas não conferem";
-      errors.confirmPassword = "Senhas não conferem";
-    } ;
-  }
-
+  if(id === 'email' && validateEmail(value))  errors.email = "E-mail inválido";
+  if(id === 'document' && validateCPF(value))  errors.document = "CPF inválido";
+  if(id === 'password' && validatePassword(value))  errors.password = "Senha deve conter no mínimo 8 digitos sendo 1 caractere em maiúsculo, 1 número e 1 caractere especial.";
   return errors;
 }
