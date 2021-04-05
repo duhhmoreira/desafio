@@ -3,10 +3,14 @@ import { useHistory  } from "react-router-dom";
 import { Button, FormControl, TextField, Typography } from '@material-ui/core';
 import { addNewSale } from '../../services/sales';
 import "./FormNewSale.Styles.scss";
+import { useDispatch } from 'react-redux';
+import { addNewSaleAction } from '../../reducers/Sales/Sales.actions';
 
 
 const FormNewSale = (  ) => {
     let history = useHistory();
+    const dispatch = useDispatch();
+
     const [newSale, setNewSale] = useState({
         id: '',
         totalValue: '',
@@ -21,11 +25,17 @@ const FormNewSale = (  ) => {
     });
   };
 
+  const addNewSale = (sale) => dispatch(addNewSaleAction(sale));
 
   const submitSale = (e) =>{
+    e.preventDefault();
     const { id, totalValue, date } = newSale;
-
-   
+    addNewSale({
+      'id': id,
+      'totalValue': totalValue,
+      'date': date
+    });
+  /* 
     addNewSale({
       'id': id,
       'totalValue': totalValue,
@@ -33,6 +43,7 @@ const FormNewSale = (  ) => {
     }).then(() => {
         setNewSale({...newSale, error: 'Cadastro duplicado',});
     });
+    */
   }
 
   const onSubmitWeb = (e) => {

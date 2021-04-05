@@ -1,6 +1,6 @@
 import { ADD_SALE } from "../../types";
 
-const  INITIAL_STATE = { sales: [] };
+const  INITIAL_STATE = [];
 
 export default function (state = INITIAL_STATE, action) {
   switch(action.type) {

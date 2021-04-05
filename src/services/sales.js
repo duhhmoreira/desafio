@@ -2,12 +2,8 @@ import { axiosClient, configHeader } from "./config";
 
 const getSellerId = localStorage.getItem('sellerId');
 
-export const getSalesFromUser = async () => {
-    try {
-        await axiosClient.get(`/sales?sellerId=${localStorage.getItem('sellerId')}`, configHeader);
-    } catch (error) {
-      console.log(error.response.data.message);
-    }
+export const getSalesFromUser = () => {
+    return axiosClient.get(`/sales?sellerId=${localStorage.getItem('sellerId')}`, configHeader); 
   };
   
   export const addNewSale = async (sale) => {

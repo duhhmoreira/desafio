@@ -6,21 +6,17 @@ import "./HomePageStyle.scss";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAllSales } from '../../reducers/Sales/Sales.selectors';
 import FormNewSale from '../../components/FormNewSale/FormNewSale';
+import { getSalesAction } from '../../reducers/Sales/Sales.actions';
 
 
 const HomePage = () => {
-  const dispatch = useDispatch()
-  const sales = useSelector(selectAllSales)
+  const sales = useSelector(selectAllSales);
+  const dispatch = useDispatch();
 
-
-  /*
-    useEffect(() => {
-      const getSales = () => dispatch(getSalesAction());
-      getSales();
-      }, []);
-  */
-
-
+  useEffect(() => {
+    const getSales = () => dispatch(getSalesAction());
+    getSales();
+    }, []);
 
   return (
     <div>
@@ -31,8 +27,13 @@ const HomePage = () => {
             <Typography component="h5" variant="h5" color="primary" align='center'>
             Confira aqui suas vendas e cashbacks recebidos
           </Typography>
+          {sales.map( sale =>{
+            <li key={sale.id}>{sale.id}</li>
+          })}
             <div className='listSales'>
-
+          {sales.map( sale =>{
+            <li key={sale.id}>{sale.id}</li>
+          })}
             </div>
           </div>
         </div>

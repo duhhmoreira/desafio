@@ -8,6 +8,7 @@ import {
 } from '../../types';
 
 import { addNewSale, getSalesFromUser } from '../../services/sales';
+import { axiosClient, configHeader } from '../../services/config';
 
 const addSale = () => ({
   type: ADD_SALE,
@@ -52,11 +53,10 @@ export function addNewSaleAction(sale) {
   };
 }
 
-export function getSalesAction() {
-  return async (dispatch) => {
-    dispatch(getSales());
+export function  getSalesAction() {
+  return function (dispatch) {
     try {
-      const res = await getSalesFromUser();
+      const res = getSalesFromUser();
       dispatch(getSalesSucess(res.data));
     } catch (error) {
       console.log(error);

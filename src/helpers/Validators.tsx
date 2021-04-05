@@ -5,7 +5,7 @@ export const validateEmail = (inputValue: string): boolean => {
 
 export const validatePassword = ( inputValue: string): boolean => {
   const regex = /^(?=(?:.*?[A-Z]){1})(?=(?:.*?[0-9]){1})(?=(?:.*?[!@#$%*()_+^&}{:;?.]){1})(?!.*\s)[0-9a-zA-Z!@#$%;*(){}_+^&]*$/; 
-  return regex.exec(inputValue) && inputValue.length < 8 ? false : true;
+  return regex.exec(inputValue) ? false : true;
 }
 
 export const validateSamePassword = ( password: string, confirmpassword: string) : boolean =>{
@@ -22,14 +22,14 @@ export const validateCPF = (strCPF : string): boolean => {
   resto = (soma * 10) % 11;
 
   if ((resto === 10) || (resto === 11))  resto = 0;
-  if (resto != parseInt(strCPF.substring(9, 10)) ) return false;
+  if (resto !== parseInt(strCPF.substring(9, 10)) ) return false;
 
   soma = 0;
   for (var i = 1; i <= 10; i++) soma = soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
   resto = (soma * 10) % 11;
 
   if ((resto === 10) || (resto === 11))  resto = 0;
-  if (resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+  if (resto !== parseInt(strCPF.substring(10, 11) ) ) return false;
   return true;
 }
 
