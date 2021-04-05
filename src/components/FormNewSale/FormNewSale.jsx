@@ -1,22 +1,21 @@
 import React, { useState } from 'react'
 import { useHistory  } from "react-router-dom";
-import { Button, FormControl, TextField, Typography } from '@material-ui/core';
-import { addNewSale } from '../../services/sales';
-import "./FormNewSale.Styles.scss";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addNewSaleAction } from '../../reducers/Sales/Sales.actions';
+import { Button, FormControl, TextField, Typography } from '@material-ui/core';
+import "./FormNewSale.Styles.scss";
 
 
 const FormNewSale = (  ) => {
     let history = useHistory();
+    const error = useSelector(state => state.sales.error);
     const dispatch = useDispatch();
 
     const [newSale, setNewSale] = useState({
         id: '',
         totalValue: '',
         date: '',
-        error: ''
-      });
+    });
 
     const handleChange = (e) => {
     setNewSale({
@@ -35,15 +34,6 @@ const FormNewSale = (  ) => {
       'totalValue': totalValue,
       'date': date
     });
-  /* 
-    addNewSale({
-      'id': id,
-      'totalValue': totalValue,
-      'date': date
-    }).then(() => {
-        setNewSale({...newSale, error: 'Cadastro duplicado',});
-    });
-    */
   }
 
   const onSubmitWeb = (e) => {
@@ -60,11 +50,11 @@ const FormNewSale = (  ) => {
         <Typography component="h5" variant="h5" color="primary" align='center'>
         Cadastro de venda
         </Typography>
-        <Typography component="p" variant="p" align='center'>
+        <p align='center'>
         Cadastre o codigo da venda, valor total e data para verificar o valor do cashback na lista de vendas
-        </Typography>
-        {newSale.error && <p className='error'>{newSale.error}</p>}
-        <FormControl className="formSale" valida>
+        </p>
+        {error && <p className='error'>{error}</p>}
+        <FormControl className="formSale">
             <TextField 
             required 
             type="text" 

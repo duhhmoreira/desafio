@@ -84,6 +84,7 @@ const LoginPage = () => {
       <Button
         variant="contained" 
         color="primary"
+        type="submit"
         className="buttonLogin"
         onClick={e => handleSignIn(e)}>
         Login

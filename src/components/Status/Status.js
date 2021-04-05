@@ -2,21 +2,20 @@ import React  from 'react';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import DoneIcon from '@material-ui/icons/Done';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
+import './Status.Styles.scss';
 
-const Status = (  ) => {
+const Status = (statusSale) => {
     
-     const typeStatus = (status) => {
-        if(status === 'aproved') return <DoneIcon/>;
-        if(status === 'reproved') {
-            return <ErrorOutlineIcon/>;
+     const typeStatus = (statusSale) => {
+        if(statusSale === 'approved') return <DoneIcon className='success'/>;
+        if(statusSale === 'reproved') {
+            return <ErrorOutlineIcon  className='error'/>;
         } else {
-            return <HourglassEmptyIcon/>;
+            return <HourglassEmptyIcon className='waiting'/>;
         }
     }
 
-    return (
-        <ErrorOutlineIcon/>
-    );
+    return typeStatus(statusSale.status);
 }
 
 export default Status;

@@ -11,6 +11,8 @@
     "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^26.0.22",
     "axios": "^0.21.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "fontsource-roboto": "^4.0.0",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
@@ -50,8 +52,18 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-react": "^7.13.13",
     "@types/react-router-dom": "^5.1.7",
     "babel-jest": "^26.6.3",
-    "jest": "^26.6.0"
+    "faker": "^5.5.2",
+    "jest": "^26.6.0",
+    "jest-cli": "^26.6.3",
+    "puppeteer": "^8.0.0"
+  },
+  "jest": {
+    "verbose": true,
+    "clearMocks": true,
+    "collectCoverage": true
   }
 }

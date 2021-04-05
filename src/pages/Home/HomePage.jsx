@@ -10,7 +10,7 @@ import { getSalesAction } from '../../reducers/Sales/Sales.actions';
 
 
 const HomePage = () => {
-  const sales = useSelector(selectAllSales);
+  const state = useSelector(selectAllSales);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,13 +27,8 @@ const HomePage = () => {
             <Typography component="h5" variant="h5" color="primary" align='center'>
             Confira aqui suas vendas e cashbacks recebidos
           </Typography>
-          {sales.map( sale =>{
-            <li key={sale.id}>{sale.id}</li>
-          })}
             <div className='listSales'>
-          {sales.map( sale =>{
-            <li key={sale.id}>{sale.id}</li>
-          })}
+            {state.sales.reverse().map(sale => (<CardInfo key={sale.id} sale={sale}/>))}
             </div>
           </div>
         </div>

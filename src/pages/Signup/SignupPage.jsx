@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { Button, FormControl, IconButton, InputAdornment, TextField } from '@material-ui/core';
+import { Button, FormControl, IconButton, TextField } from '@material-ui/core';
 import { Link, useHistory } from "react-router-dom";
-import {InputMask} from 'react-input-mask';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import "./SignupPageStyle.scss";
