@@ -17,6 +17,8 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+During the test run another terminal with the application running for the tests E2E.
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br />
